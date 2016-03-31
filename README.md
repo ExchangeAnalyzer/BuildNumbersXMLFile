@@ -1,2 +1,1 @@
-# BuildNumbersXMLFile
-Script to generate Exchange Server build numbers XML file from TechNet
+This PowerShell script scrapes the Exchange Server build numbers page on TechNet to generate the XML file used by Exchange Analyzer.
