@@ -9,11 +9,15 @@ Function Get-ExchangeBuildNumbers()
     
     Write-Verbose "Fetching Exchange build numbers from TechNet"
     
-    $URL = "https://technet.microsoft.com/en-us/library/hh135098(v=exchg.160).aspx"
+    $URL = "https://docs.microsoft.com/en-us/Exchange/new-features/build-numbers-and-release-dates?view=exchserver-2019"
     try
     {
-        $WebPage = Invoke-WebRequest -Uri $URL -ErrorAction STOP
-        $tables = @($WebPage.Parsedhtml.getElementsByTagName("TABLE"))
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        $WebPage = Invoke-WebRequest -Uri $URL -UseBasicParsing -ErrorAction STOP
+        $WebPage.Content | Out-File BuildNumbers.html
+        $HTML = New-Object -ComObject "HTMLFile"
+        $HTML.IHTMLDocument2_write($(Get-Content .\BuildNumbers.html -raw))
+        $tables = @($HTML.getElementsByTagName("TABLE"))
 
         Write-Verbose "Parsing results from web request"
         foreach ($table in $tables)
