@@ -1,1 +1,1 @@
-This PowerShell script scrapes the Exchange Server build numbers page on TechNet to generate the XML file used by Exchange Analyzer.
+This PowerShell script scrapes the Exchange Server build numbers page on Microsoft Docs to generate the XML file used by Exchange Analyzer.
